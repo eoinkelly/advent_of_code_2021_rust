@@ -1,4 +1,5 @@
-use std::fs;
+use std::fs::File;
+use std::io::{BufRead, BufReader};
 use std::str::FromStr;
 
 // https://adventofcode.com/2021/day/1
@@ -30,8 +31,7 @@ pub fn puzzle_2() -> isize {
     // two readings. We are counting increases in the sum of the window. Stop
     // iterating when there would not be enough readings left to make a 3-wide
     // window.
-    for i in 0..(sonar_readings.len() - 2) {
-        let chunk = &sonar_readings[i..i + 3];
+    for chunk in sonar_readings.windows(3) {
         let chunk_sum = chunk.iter().sum();
 
         if chunk_sum > prev_sum && prev_sum != 0 {
@@ -46,11 +46,11 @@ pub fn puzzle_2() -> isize {
 }
 
 fn parse_input(input_path: &str) -> Vec<isize> {
-    let input_lines = fs::read_to_string(input_path).expect("Failed to read file");
+    let f = File::open(input_path).unwrap();
+    let f = BufReader::new(f);
 
-    input_lines
-        .split('\n')
-        .map(|reading| isize::from_str(reading).unwrap())
+    f.lines()
+        .map(|reading| isize::from_str(reading.unwrap().as_str()).unwrap())
         .collect()
 }
 

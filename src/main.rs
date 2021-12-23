@@ -2,6 +2,7 @@ mod day_1;
 mod day_2;
 mod day_3;
 mod day_4;
+mod day_5;
 mod matrix;
 
 fn main() {
@@ -16,4 +17,7 @@ fn main() {
 
     println!("Day 4: Puzzle 1: {:?}", day_4::puzzle_1());
     println!("Day 4: Puzzle 2: {:?}", day_4::puzzle_2());
+
+    // println!("Day 5: Puzzle 1: {:?}", day_5::puzzle_1());
+    // println!("Day 5: Puzzle 2: {:?}", day_5::puzzle_2());
 }

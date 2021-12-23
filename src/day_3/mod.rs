@@ -43,9 +43,10 @@ fn build_rows(raw_input: &str) -> Vec<Vec<usize>> {
 //
 fn build_cols_from_rows(rows: &[Vec<usize>]) -> Vec<Vec<usize>> {
     // We assume that all rows are the same length
-    let num_cols = rows.get(0).expect("Failed to read first row").len();
+    let num_cols = rows.get(0).unwrap().len();
+    let num_rows = rows.len();
 
-    let mut cols: Vec<Vec<usize>> = vec![vec![]; num_cols];
+    let mut cols: Vec<Vec<usize>> = vec![Vec::with_capacity(num_rows); num_cols];
 
     for row in rows {
         for i in 0..num_cols {

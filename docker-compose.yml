@@ -1,0 +1,10 @@
+version: '3'
+services:
+  ubuntu:
+    # platform: linux/x86_64
+    image: ubuntu:latest
+    environment:
+      CARGO_TARGET_DIR: /data/linux_target
+    volumes:
+      - .:/data
+    command: tail -f /dev/null

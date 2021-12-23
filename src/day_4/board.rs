@@ -42,7 +42,7 @@ impl Board {
 
         // check each column
         for col in matrix::transpose(&self.squares) {
-            if col.iter().all(Square::is_marked) {
+            if col.iter().all(|s| s.is_marked()) {
                 return true;
             }
         }

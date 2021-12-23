@@ -1,4 +1,5 @@
-use std::fs;
+use std::fs::File;
+use std::io::{BufRead, BufReader};
 use std::str::FromStr;
 
 // https://adventofcode.com/2021/day/2
@@ -106,9 +107,12 @@ fn parse_cmd(raw_cmd: &str) -> Command {
 }
 
 fn parse_input(input_path: &str) -> Vec<Command> {
-    let input_lines = fs::read_to_string(input_path).expect("Failed to read file");
+    let f = File::open(input_path).unwrap();
+    let f = BufReader::new(f);
 
-    input_lines.split('\n').map(parse_cmd).collect()
+    f.lines()
+        .map(|line| parse_cmd(line.unwrap().as_str()))
+        .collect()
 }
 
 #[cfg(test)]
